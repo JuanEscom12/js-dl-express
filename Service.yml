@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: calpullix-eureka-server
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+# app (Nombre del deployment de la API)
+
+-----------------------------------------
+# YML del Route generado por Openshift
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  annotations:
+    openshift.io/host.generated: 'true'
+  selfLink: >-
+    /apis/route.openshift.io/v1/namespaces/calpullix-eureka-server/routes/backend
+  resourceVersion: '471365735'
+  name: backend
+  uid: 18c3e0d5-2b4b-444b-b52a-097426e96484
+  creationTimestamp: '2020-08-28T17:24:15Z'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2020-08-28T17:24:15Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:app.kubernetes.io/component': {}
+            'f:app.kubernetes.io/instance': {}
+        'f:spec':
+          'f:port':
+            .: {}
+            'f:targetPort': {}
+          'f:to':
+            'f:kind': {}
+            'f:name': {}
+            'f:weight': {}
+          'f:wildcardPolicy': {}
+    - manager: openshift-router
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2020-08-28T17:24:16Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:ingress': {}
+  namespace: calpullix-eureka-server
+  labels:
+    app: backend
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/instance: backend
+spec:
+  host: backend-calpullix-eureka-server.apps.us-west-1.starter.openshift-online.com
+  to:
+    kind: Service
+    name: backend
+    weight: 100
+  port:
+    targetPort: 3000-tcp
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: >-
+        backend-calpullix-eureka-server.apps.us-west-1.starter.openshift-online.com
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2020-08-28T17:24:16Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: apps.us-west-1.starter.openshift-online.com
